@@ -4,6 +4,7 @@ ORDER BY 3,4
 
 -- Select the data that we are going to be using
 
+
 SELECT Location, date, total_cases, total_deaths, population 
 FROM Covid..CovidDeaths$
 order by 1, 2
@@ -20,3 +21,9 @@ SELECT Location, date, total_cases, (total_cases/population)*100 as PopulationEf
 FROM Covid..CovidDeaths$
 WHERE Location = 'India'
 order by 1, 2
+
+-- Average Death Percentage around the world
+SELECT Location, AVG((total_deaths/total_cases)*100) as AverageDeathPercentage
+FROM Covid..CovidDeaths$
+GROUP BY Location
+ORDER BY 2 DESC
