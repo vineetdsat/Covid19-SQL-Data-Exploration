@@ -23,7 +23,11 @@ WHERE Location = 'India'
 order by 1, 2
 
 -- Average Death Percentage around the world
-SELECT Location, AVG((total_deaths/total_cases)*100) as AverageDeathPercentage
+SELECT Location, MAX(population) as population, ROUND(AVG((total_deaths/total_cases)*100),2) as AverageDeathPercentage
 FROM Covid..CovidDeaths$
-GROUP BY Location
+WHERE continent is NOT NULL  -- issue with the dataset
+GROUP BY Location, population
 ORDER BY 2 DESC
+
+
+-- 
